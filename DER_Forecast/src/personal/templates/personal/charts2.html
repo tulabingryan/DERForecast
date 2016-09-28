@@ -1,0 +1,82 @@
+{% extends "personal/header.html" %}
+{% load django_tables2 %}
+
+{% block extrahead %}
+	<!-- For loading the graph -->
+	<!-- Load in jQuery and HighCharts -->
+	 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}django_tables2/themes/paleblue/css/screen.css" />
+    {% load chartit %}
+	{{ forecastchart|load_charts:"container" }}
+
+
+	<!-- For loading the table -->
+	<!-- Latest compiled and minified JavaScript -->
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-table.js"></script>
+    <!-- Bootstrap - Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-table.css">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+     <meta charset="UTF-8">
+    <link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-0.11.0.min.css" type="text/css" />
+    <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-0.11.0.min.js">
+    </script>
+    {{ the_script|safe}}
+
+
+{% endblock %}
+
+
+
+{% block content %}
+	<!-- <h2>{{"Charts"}}</h2> -->
+	<div id='container'> 	{{ forecastchart|load_charts:"container" }} </div>
+
+	<!-- table -->
+    <table class='table table-hover'>
+    <thead>
+    <TR>
+        <TH data-align="center" data-sortable="true">Timestamp</TH>
+        <TH data-align="center" data-sortable="true">SolarPower Output</TH>
+        <TH data-align="center" data-sortable="true">WindPower Output</TH>
+    </TR>
+    </thead>
+
+    {% for row in tableData %}
+ 		<tr>
+    		{% for item in row %}
+        		<td>{{ item }}</td>
+    		{% endfor %}
+ 		</tr>
+	{% endfor %}
+
+    </table>
+
+
+
+    <table class='table table-hover'>
+        <thead>
+        <TR>
+        {% for header in tableData.headers %}
+            <TH data-align="center" data-sortable="true"> {{header}} </TH>
+        {% endfor %}
+        </TR>
+        </thead>
+
+        <tr>
+        {% for data in tableData.rows %}
+            <td data-align="center" data-sortable="true"> {{data}} </td>
+        {% endfor %}
+        </tr>
+
+    </table>
+
+{% endblock %}
+
+

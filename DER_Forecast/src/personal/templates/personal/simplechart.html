@@ -1,0 +1,16 @@
+{% extends "personal/header.html" %}
+{% load crispy_forms_tags%}
+
+{%block extrahead%}
+
+{%endblock%}
+
+{% block content %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-0.11.0.min.css" type="text/css" />
+    <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-0.11.0.min.js">
+    </script>
+    {{ the_script|safe}}
+    {{ the_div|safe}}
+    <h1>Experiment with Bokeh</h1>
+{%endblock%}

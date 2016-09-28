@@ -1,0 +1,58 @@
+{% extends "personal/header.html" %}
+{% load crispy_forms_tags%}
+
+{% block extrahead %}
+	<!-- For loading the graph -->
+    <meta charset="utf-8">
+    <title>Bokeh Scatter Plots</title>
+
+    <link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-0.12.2.min.css" type="text/css" />
+    <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.2.min.js"></script>
+    
+    {{ the_script|safe}}
+    
+
+    <!-- For loading the table -->
+    <!-- Latest compiled and minified JavaScript -->
+
+<!-- 
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-table.js"></script>
+    Bootstrap - Latest compiled and minified CSS
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-table.css">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+ -->
+{% endblock %}
+
+
+
+{% block content %}
+    {{ the_div|safe}}
+    
+ <tbody>
+     <div class="table-responsive">
+     <table  class="table table-striped">
+     <TR>
+         <TH data-align="center" data-sortable="true">DATETIME</TH>
+         <TH data-align="center" data-sortable="true">SOLAR POWER(kW)</TH>
+         <TH data-align="center" data-sortable="true">WIND POWER(kW)</TH>
+     </TR>
+     {% for x,y in tableData.items %}
+         <tr>
+         <td>{{ y.0 }}</td>
+         <td>{{ y.1 }}</td>
+         <td>{{ y.2 }}</td>
+ 
+         </tr>
+     {% endfor %}
+     </table>
+     </div>
+ </tbody>
+{% endblock %}
+
+
